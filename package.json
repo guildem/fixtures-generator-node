@@ -1,0 +1,34 @@
+{
+  "name": "fixtures-generator-node",
+  "version": "0.1.0",
+  "description": "Library helping to generate randomized fixtures with almost-real datas.",
+  "keywords": [
+    "nodejs",
+    "fixtures",
+    "random",
+    "generator",
+    "mock",
+    "prototyping"
+  ],
+  "repository": "guildem/fixtures-generator-node",
+  "homepage": "https://github.com/guildem/fixtures-generator-node",
+  "bugs": "https://github.com/guildem/fixtures-generator-node/issues",
+  "license": "MIT",
+  "author": "Guillaume Démurgé <gdemurge@gmail.com>",
+  "main": "dist/index.min.js",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "./node_modules/.bin/rollup -c",
+    "dist": "./node_modules/uglify-js/bin/uglifyjs ./dist/index.js -c -m -o ./dist/index.min.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelrc-rollup": "^3.0.0",
+    "rollup": "^0.47.0",
+    "rollup-plugin-babel": "^3.0.1",
+    "uglify-js": "^3.0.27"
+  },
+  "dependencies": {}
+}

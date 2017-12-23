@@ -1,38 +1,36 @@
-import { integer } from './numbers';
+import { integer } from './numbers'
 
-let memorized = [];
+let memorized = []
 
-const memorize = (value, {} = {}) => {
+export function memorize = (value, {} = {}) => {
   if (!isMemorized(value))
-    memorized.push(value);
-  return value;
+    memorized.push(value)
+  return value
 }
 
-const isMemorized = (value, {} = {}) => {
-  return memorized.includes(value);
+export function isMemorized = (value, {} = {}) => {
+  return memorized.includes(value)
 }
 
-const getOneMemorized = ({forget = false} = {}) => {
-  const index = integer({max: memorized.length - 1});
-  const value = memorized[index];
+export function getOneMemorized = ({forget = false} = {}) => {
+  const index = integer({max: memorized.length - 1})
+  const value = memorized[index]
   if (forget)
-    forgetOneMemorized(value);
-  return value;
+    forgetOneMemorized(value)
+  return value
 }
 
-const getAllMemorized = ({forget = false} = {}) => {
-  const array = [].concat(memorized);
+export function getAllMemorized = ({forget = false} = {}) => {
+  const array = [].concat(memorized)
   if (forget)
-    exports.forgetAllMemorized();
-  return array;
+    exports.forgetAllMemorized()
+  return array
 }
 
-const forgetOneMemorized = (value, {} = {}) => {
-  memorized = memorized.filter(v => v !== value);
+export function forgetOneMemorized = (value, {} = {}) => {
+  memorized = memorized.filter(v => v !== value)
 }
 
-const forgetAllMemorized = ({} = {}) => {
-  memorized = [];
+export function forgetAllMemorized = ({} = {}) => {
+  memorized = []
 }
-
-export { memorize, isMemorized, getOneMemorized, getAllMemorized, forgetOneMemorized, forgetAllMemorized };

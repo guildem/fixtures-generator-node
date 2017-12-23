@@ -22,24 +22,24 @@ export function words({min = 5, max = 15, sentence = true} = {}) {
   return result.join(' ') + (sentence ? '.' : '')
 };
 
-export function sentences({min = 2, max = 4, words = {}} = {}) {
+export function sentences({min = 2, max = 4} = {}) {
   let result = []
   let count = Math.max(1, integer({min, max}))
 
   while (count > 0) {
-    result.push(words(words))
+    result.push(words())
     count--
   }
 
   return result.join(' ')
 }
 
-export function paragraphes({sentences: {}} = {}) {
+export function paragraphes() {
   let result = []
   let count = Math.max(1, integer({min, max}))
 
   while (count > 0) {
-    result.push(sentences(sentences))
+    result.push(sentences())
     count--
   }
 

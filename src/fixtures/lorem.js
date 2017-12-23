@@ -34,12 +34,12 @@ export function sentences({min = 2, max = 4} = {}) {
   return result.join(' ')
 }
 
-export function paragraphes() {
+export function paragraphes({min = 2, max = 6} = {}) {
   let result = []
   let count = Math.max(1, integer({min, max}))
 
   while (count > 0) {
-    result.push(sentences())
+    result.push(sentences({min: 4, max: 10}))
     count--
   }
 

@@ -161,11 +161,17 @@ function sentences() {
 }
 
 function paragraphes() {
+  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref3$min = _ref3.min,
+      min = _ref3$min === undefined ? 2 : _ref3$min,
+      _ref3$max = _ref3.max,
+      max = _ref3$max === undefined ? 6 : _ref3$max;
+
   var result = [];
   var count = Math.max(1, integer({ min: min, max: max }));
 
   while (count > 0) {
-    result.push(sentences());
+    result.push(sentences({ min: 4, max: 10 }));
     count--;
   }
 

@@ -8,7 +8,7 @@ export function word() {
   return list({values: lorem})
 };
 
-export function words({min = 5, max = 15, sentence = false} = {}) {
+export function words({min = 5, max = 15, sentence = true} = {}) {
   let result = []
   let count = Math.max(1, integer({min, max}))
 
@@ -22,12 +22,12 @@ export function words({min = 5, max = 15, sentence = false} = {}) {
   return result.join(' ') + (sentence ? '.' : '')
 };
 
-export function sentences({min = 2, max = 4, words} = {}) {
+export function sentences({min = 2, max = 4, words = {}} = {}) {
   let result = []
   let count = Math.max(1, integer({min, max}))
 
   while (count > 0) {
-    result.push(words({...words, sentence: true}))
+    result.push(words(words))
     count--
   }
 

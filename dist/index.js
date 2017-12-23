@@ -4,7 +4,7 @@
 	(factory((global['fixtures-generator-node'] = {})));
 }(this, (function (exports) { 'use strict';
 
-var float = function float() {
+function float() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref$min = _ref.min,
       min = _ref$min === undefined ? 0 : _ref$min,
@@ -12,9 +12,9 @@ var float = function float() {
       max = _ref$max === undefined ? 1 : _ref$max;
 
   return Math.random() * (max - min) + min;
-};
+}
 
-var fixed = function fixed() {
+function fixed() {
   var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref2$min = _ref2.min,
       min = _ref2$min === undefined ? 0 : _ref2$min,
@@ -24,9 +24,9 @@ var fixed = function fixed() {
       decimals = _ref2$decimals === undefined ? 2 : _ref2$decimals;
 
   return float({ min: min, max: max }).toFixed(decimals);
-};
+}
 
-var integer = function integer() {
+function integer() {
   var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref3$min = _ref3.min,
       min = _ref3$min === undefined ? 0 : _ref3$min,
@@ -36,17 +36,15 @@ var integer = function integer() {
   min = Math.ceil(min);
   max = Math.floor(max) + 1;
   return Math.floor(float({ min: min, max: max }));
-};
+}
 
-var boolean = function boolean() {
+function boolean() {
   var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref4$percent = _ref4.percent,
       percent = _ref4$percent === undefined ? 0.5 : _ref4$percent;
 
   return Math.random() > percent;
-};
-
-
+}
 
 var numbers = Object.freeze({
 	float: float,
@@ -55,14 +53,14 @@ var numbers = Object.freeze({
 	boolean: boolean
 });
 
-var list = function list(_ref) {
+function list(_ref) {
   var values = _ref.values;
 
   if (values.length < 1) return undefined;
   return values[Math.floor(Math.random() * values.length)];
-};
+}
 
-var mask = function mask(_ref2) {
+function mask(_ref2) {
   var format = _ref2.format;
 
   var result = '';
@@ -107,9 +105,7 @@ var mask = function mask(_ref2) {
     result += array[i];
   }
   return result;
-};
-
-
+}
 
 var utils = Object.freeze({
 	list: list,
@@ -170,79 +166,100 @@ var lorem = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do ei
   return w !== undefined && w.length > 0;
 });
 
-var loremWord = function loremWord() {
-  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  objectDestructuringEmpty(_ref);
-
+function word() {
   return list({ values: lorem });
-};
+}
 
-var loremWords = function loremWords() {
-  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref2$min = _ref2.min,
-      min = _ref2$min === undefined ? 5 : _ref2$min,
-      _ref2$max = _ref2.max,
-      max = _ref2$max === undefined ? 15 : _ref2$max,
-      _ref2$sentence = _ref2.sentence,
-      sentence = _ref2$sentence === undefined ? false : _ref2$sentence;
+function words() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$min = _ref.min,
+      min = _ref$min === undefined ? 5 : _ref$min,
+      _ref$max = _ref.max,
+      max = _ref$max === undefined ? 15 : _ref$max,
+      _ref$sentence = _ref.sentence,
+      sentence = _ref$sentence === undefined ? true : _ref$sentence;
 
   var result = [];
   var count = Math.max(1, integer({ min: min, max: max }));
 
   while (count > 0) {
-    result.push(loremWord());
+    result.push(word());
     count--;
   }
 
   result[0] = result[0][0].toUpperCase() + result[0].slice(1);
 
   return result.join(' ') + (sentence ? '.' : '');
-};
+}
 
-var loremSentences = function loremSentences() {
-  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref3$min = _ref3.min,
-      min = _ref3$min === undefined ? 2 : _ref3$min,
-      _ref3$max = _ref3.max,
-      max = _ref3$max === undefined ? 4 : _ref3$max;
+function sentences() {
+  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref2$min = _ref2.min,
+      min = _ref2$min === undefined ? 2 : _ref2$min,
+      _ref2$max = _ref2.max,
+      max = _ref2$max === undefined ? 4 : _ref2$max,
+      _ref2$words = _ref2.words,
+      words = _ref2$words === undefined ? {} : _ref2$words;
 
   var result = [];
   var count = Math.max(1, integer({ min: min, max: max }));
 
   while (count > 0) {
-    result.push(loremWords({ sentence: true }));
+    result.push(words(words));
     count--;
   }
 
   return result.join(' ');
-};
+}
+
+function paragraphes() {
+  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  objectDestructuringEmpty(_ref3.sentences);
+
+  var result = [];
+  var count = Math.max(1, integer({ min: min, max: max }));
+
+  while (count > 0) {
+    result.push(sentences(sentences));
+    count--;
+  }
+
+  return result.join('\n');
+}
 
 
 
 var lorem$1 = Object.freeze({
-	loremWord: loremWord,
-	loremWords: loremWords,
-	loremSentences: loremSentences
+	word: word,
+	words: words,
+	sentences: sentences,
+	paragraphes: paragraphes
 });
 
-var timestamp = function timestamp() {
+var lastTimestamp = 0;
+
+function timestamp() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref$min = _ref.min,
       min = _ref$min === undefined ? Date.now() - 365 * 24 * 60 * 60 * 1000 : _ref$min,
       _ref$max = _ref.max,
       max = _ref$max === undefined ? Date.now() : _ref$max;
 
-  return integer({ min: min, max: max });
-};
+  lastTimestamp = integer({ min: min, max: max });
+  return lastTimestamp;
+}
 
-
+function last() {
+  return lastTimestamp;
+}
 
 var dates = Object.freeze({
-	timestamp: timestamp
+	timestamp: timestamp,
+	last: last
 });
 
-var fakeImageUrl = function fakeImageUrl() {
+function fakeImageUrl() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref$width = _ref.width,
       width = _ref$width === undefined ? 640 : _ref$width,
@@ -256,9 +273,9 @@ var fakeImageUrl = function fakeImageUrl() {
       text = _ref$text === undefined ? 'Fake Image' : _ref$text;
 
   return 'http://fakeimg.pl/' + width + 'x' + height + '/' + bg + '/' + fg + '/?text=' + text.replace(' ', '+');
-};
+}
 
-var realImageUrl = function realImageUrl() {
+function realImageUrl() {
   var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref2$width = _ref2.width,
       width = _ref2$width === undefined ? 640 : _ref2$width,
@@ -270,9 +287,9 @@ var realImageUrl = function realImageUrl() {
       filter = _ref2$filter === undefined ? '' : _ref2$filter;
 
   return 'http://placeimg.com/' + width + '/' + height + '/' + type + '/' + filter;
-};
+}
 
-var avatarUrl = function avatarUrl() {
+function avatarUrl() {
   var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref3$gender = _ref3.gender,
       gender = _ref3$gender === undefined ? '' : _ref3$gender;
@@ -281,9 +298,7 @@ var avatarUrl = function avatarUrl() {
 
   if (gender === 'f') return 'https://randomuser.me/api/portraits/women/' + integer({ min: 1, max: 99 }) + '.jpg';
   return 'https://randomuser.me/api/portraits/men/' + integer({ min: 1, max: 99 }) + '.jpg';
-};
-
-
+}
 
 var images = Object.freeze({
 	fakeImageUrl: fakeImageUrl,
@@ -298,7 +313,7 @@ var emailDomains = ['gmail.com', 'hotmail.com', 'yahoo.fr', 'wanadoo.fr', 'free.
 
 // Profile
 
-var firstname = function firstname() {
+function firstname() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref$gender = _ref.gender,
       gender = _ref$gender === undefined ? '' : _ref$gender;
@@ -307,32 +322,28 @@ var firstname = function firstname() {
 
   if (gender === 'f') return list({ values: firstnamesFemale });
   return list({ values: firstnamesMale });
-};
+}
 
-var lastname = function lastname() {
-  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  objectDestructuringEmpty(_ref2);
-
+function lastname() {
   return list({ values: lastnames });
-};
+}
 
-var fullname = function fullname() {
-  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref3$gender = _ref3.gender,
-      gender = _ref3$gender === undefined ? '' : _ref3$gender;
+function fullname() {
+  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref2$gender = _ref2.gender,
+      gender = _ref2$gender === undefined ? '' : _ref2$gender;
 
   return firstname({ gender: gender }) + ' ' + lastname();
-};
+}
 
-var email = function email() {
-  var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-      _ref4$fullname = _ref4.fullname,
-      fullname = _ref4$fullname === undefined ? '' : _ref4$fullname,
-      _ref4$prefix = _ref4.prefix,
-      prefix = _ref4$prefix === undefined ? 'fake.' : _ref4$prefix,
-      _ref4$domain = _ref4.domain,
-      domain = _ref4$domain === undefined ? '' : _ref4$domain;
+function email() {
+  var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref3$fullname = _ref3.fullname,
+      fullname = _ref3$fullname === undefined ? '' : _ref3$fullname,
+      _ref3$prefix = _ref3.prefix,
+      prefix = _ref3$prefix === undefined ? 'fake.' : _ref3$prefix,
+      _ref3$domain = _ref3.domain,
+      domain = _ref3$domain === undefined ? '' : _ref3$domain;
 
   if (!fullname) fullname = fullname();
   fullname = fullname.toLowerCase();
@@ -351,7 +362,7 @@ var email = function email() {
   if (!domain) domain = list({ values: emailDomains });
 
   return fullname + '@' + prefix + domain;
-};
+}
 
 
 
@@ -364,24 +375,24 @@ var profile = Object.freeze({
 
 var memorized = [];
 
-var memorize = function memorize(value) {
+function memorize(value) {
   var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   objectDestructuringEmpty(_ref);
 
   if (!isMemorized(value)) memorized.push(value);
   return value;
-};
+}
 
-var isMemorized = function isMemorized(value) {
+function isMemorized(value) {
   var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   objectDestructuringEmpty(_ref2);
 
   return memorized.includes(value);
-};
+}
 
-var getOneMemorized = function getOneMemorized() {
+function getOneMemorized() {
   var _ref3 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref3$forget = _ref3.forget,
       forget = _ref3$forget === undefined ? false : _ref3$forget;
@@ -390,9 +401,9 @@ var getOneMemorized = function getOneMemorized() {
   var value = memorized[index];
   if (forget) forgetOneMemorized(value);
   return value;
-};
+}
 
-var getAllMemorized = function getAllMemorized() {
+function getAllMemorized() {
   var _ref4 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       _ref4$forget = _ref4.forget,
       forget = _ref4$forget === undefined ? false : _ref4$forget;
@@ -400,9 +411,9 @@ var getAllMemorized = function getAllMemorized() {
   var array = [].concat(memorized);
   if (forget) exports.forgetAllMemorized();
   return array;
-};
+}
 
-var forgetOneMemorized = function forgetOneMemorized(value) {
+function forgetOneMemorized(value) {
   var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   objectDestructuringEmpty(_ref5);
@@ -410,15 +421,15 @@ var forgetOneMemorized = function forgetOneMemorized(value) {
   memorized = memorized.filter(function (v) {
     return v !== value;
   });
-};
+}
 
-var forgetAllMemorized = function forgetAllMemorized() {
+function forgetAllMemorized() {
   var _ref6 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   objectDestructuringEmpty(_ref6);
 
   memorized = [];
-};
+}
 
 
 

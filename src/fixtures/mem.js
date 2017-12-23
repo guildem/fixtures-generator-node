@@ -2,17 +2,17 @@ import { integer } from './numbers'
 
 let memorized = []
 
-export function memorize = (value, {} = {}) => {
+export function memorize(value, {} = {}) {
   if (!isMemorized(value))
     memorized.push(value)
   return value
 }
 
-export function isMemorized = (value, {} = {}) => {
+export function isMemorized(value, {} = {}) {
   return memorized.includes(value)
 }
 
-export function getOneMemorized = ({forget = false} = {}) => {
+export function getOneMemorized({forget = false} = {}) {
   const index = integer({max: memorized.length - 1})
   const value = memorized[index]
   if (forget)
@@ -20,17 +20,17 @@ export function getOneMemorized = ({forget = false} = {}) => {
   return value
 }
 
-export function getAllMemorized = ({forget = false} = {}) => {
+export function getAllMemorized({forget = false} = {}) {
   const array = [].concat(memorized)
   if (forget)
     exports.forgetAllMemorized()
   return array
 }
 
-export function forgetOneMemorized = (value, {} = {}) => {
+export function forgetOneMemorized(value, {} = {}) {
   memorized = memorized.filter(v => v !== value)
 }
 
-export function forgetAllMemorized = ({} = {}) => {
+export function forgetAllMemorized({} = {}) {
   memorized = []
 }

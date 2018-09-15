@@ -1,36 +1,47 @@
-import { integer } from './numbers'
+const numbers = require('./numbers')
 
-let memorized = []
+let memory = {}
 
-export function memorize(value, {} = {}) {
-  if (!isMemorized(value))
-    memorized.push(value)
+function _check(name) {
+  if (!Array.isArray(memory[name]))
+    memory[name] = []
+}
+
+function _index(name) {
+  return numbers.int({min:0,max: memory[name].length - 1})
+}
+
+export function keep(value, name = '_default') {
+  _check(name)
+  memory[name].push(value)
   return value
 }
+export const save = keep
+export const memorize = keep
+export const retain = keep
 
-export function isMemorized(value, {} = {}) {
-  return memorized.includes(value)
+export function one(name = '_default') {
+  _check(name)
+  if (memory[name].length < 1) return null
+  return memory[name][_index(name)]
+}
+export const get = one
+
+export function pop(name = '_default') {
+  _check(name)
+  if (memory[name].length < 1) return null
+  return memory[name].splice(_index(name), 1).pop()
 }
 
-export function getOneMemorized({forget = false} = {}) {
-  const index = integer({max: memorized.length - 1})
-  const value = memorized[index]
-  if (forget)
-    forgetOneMemorized(value)
-  return value
+export function all(name = '_default') {
+  _check(name)
+  return memory[name]
 }
+export const array = all
 
-export function getAllMemorized({forget = false} = {}) {
-  const array = [].concat(memorized)
-  if (forget)
-    exports.forgetAllMemorized()
-  return array
+export function clear(name = '_default') {
+  _check(name)
+  memory[name] = []
 }
-
-export function forgetOneMemorized(value, {} = {}) {
-  memorized = memorized.filter(v => v !== value)
-}
-
-export function forgetAllMemorized({} = {}) {
-  memorized = []
-}
+export const clean = clear
+export const erase = clear

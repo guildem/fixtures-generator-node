@@ -5,11 +5,11 @@ export default {
   input: 'src/index.js',
   output: {
     file: 'dist/index.js',
-    format: 'umd',
+    format: 'cjs',
     name: 'fixtures-generator-node',
-    sourcemap: true,
+    sourcemap: false,
   },
   plugins: [
-    babel(babelrc())
+    babel(babelrc()),
   ]
 };

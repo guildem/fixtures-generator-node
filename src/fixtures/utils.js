@@ -1,4 +1,4 @@
-const numbers = require('./numbers')
+import * as numbers from './numbers'
 
 export function oneOf(values) {
   if (!Array.isArray(values) || values.length < 1) return null

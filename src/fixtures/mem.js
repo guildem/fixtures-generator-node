@@ -1,4 +1,4 @@
-const numbers = require('./numbers')
+import * as numbers from './numbers'
 
 let memory = {}
 

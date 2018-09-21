@@ -5,6 +5,16 @@ export function oneOf(values) {
   return values[numbers.int({min:0,max:values.length-1})]
 }
 
+export function array(count = 0, map) {
+  if (count < 0) count = 0
+
+  const a = new Array(count)
+  if (typeof map === 'function')
+    for (let i = 0; i < count; i++)
+      a[i] = map(i)
+  return a
+}
+
 // export function mask(format) {
 //   let result = ''
 //   const array = format.split('')

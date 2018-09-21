@@ -2,10 +2,13 @@ import babel from 'rollup-plugin-babel';
 import babelrc from 'babelrc-rollup';
 
 export default {
-  entry: 'src/index.js',
-  dest: 'dist/index.js',
-  format: 'umd',
-  moduleName: 'fixtures-generator-node',
+  input: 'src/index.js',
+  output: {
+    file: 'dist/index.js',
+    format: 'umd',
+    name: 'fixtures-generator-node',
+    sourcemap: true,
+  },
   plugins: [
     babel(babelrc())
   ]

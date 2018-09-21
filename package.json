@@ -1,6 +1,6 @@
 {
   "name": "fixtures-generator-node",
-  "version": "0.1.5",
+  "version": "0.2",
   "description": "Library helping to generate randomized fixtures with almost-real datas.",
   "keywords": [
     "nodejs",
@@ -18,8 +18,7 @@
   "main": "dist/index.min.js",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "rollup -c",
-    "dist": "uglifyjs ./dist/index.js -c -m -o ./dist/index.min.js",
+    "build": "rollup -c && uglifyjs ./dist/index.js -c -m -o ./dist/index.min.js",
     "test": "mocha --require babel-register --require chai/register-should"
   },
   "devDependencies": {

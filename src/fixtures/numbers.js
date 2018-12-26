@@ -1,5 +1,5 @@
 export function bool(percent = 0.5) {
-  return (Math.random() > percent)
+  return (Math.random() < percent)
 }
 export const boolean = bool
 

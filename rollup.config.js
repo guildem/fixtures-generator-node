@@ -1,5 +1,5 @@
+import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
-import babelrc from 'babelrc-rollup';
 
 export default {
   input: 'src/index.js',
@@ -7,9 +7,12 @@ export default {
     file: 'dist/index.js',
     format: 'cjs',
     name: 'fixtures-generator-node',
-    sourcemap: false,
+    sourcemap: false
   },
   plugins: [
-    babel(babelrc()),
+    resolve(),
+    babel({
+      exclude: 'node_modules/**'
+    })
   ]
 };

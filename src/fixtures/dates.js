@@ -1,30 +1,30 @@
 import * as numbers from './numbers'
 
-let lastTimestamp = null
-let lastMin = null
-let lastMax = null
+let _lastTimestamp = null
+let _lastMin = null
+let _lastMax = null
 
 export function timestamp({min = (Date.now() - (365*24*60*60*1000)), max = Date.now()} = {}) {
-  lastTimestamp = numbers.int({min, max})
-  lastMin = min
-  lastMax = max
-  return lastTimestamp
+  _lastTimestamp = numbers.int({min, max})
+  _lastMin = min
+  _lastMax = max
+  return _lastTimestamp
 }
 
-export function after({max = lastMax} = {}) {
-  return timestamp({min: lastTimestamp, max: max})
+export function after({max = _lastMax} = {}) {
+  return timestamp({min: _lastTimestamp, max: max})
 }
 
-export function before({min = lastMin} = {}) {
-  return timestamp({min: min, max: lastTimestamp})
+export function before({min = _lastMin} = {}) {
+  return timestamp({min: min, max: _lastTimestamp})
 }
 
 export function last() {
-  return lastTimestamp
+  return _lastTimestamp
 }
 
 export function erase() {
-  lastTimestamp = null
-  lastMin = null
-  lastMax = null
+  _lastTimestamp = null
+  _lastMin = null
+  _lastMax = null
 }

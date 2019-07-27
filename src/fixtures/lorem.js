@@ -1,11 +1,11 @@
 import * as numbers from './numbers'
 import * as utils from './utils'
 
-const lorem = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. ut labore et dolore magna aliqua. Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip commodo consequat. Duis aute irure dolor reprehenderit voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim est laborum.'
+const _lorem = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. ut labore et dolore magna aliqua. Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip commodo consequat. Duis aute irure dolor reprehenderit voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim est laborum.'
         .toLowerCase().split(/\s*[,. ]\s*/).filter(w => (w !== undefined && w.length > 0))
 
 export function word() {
-  return utils.oneOf(lorem)
+  return utils.oneOf(_lorem)
 }
 
 export function words({min = 5, max = 15, sentence = true} = {}) {

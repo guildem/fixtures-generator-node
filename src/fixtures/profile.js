@@ -15,15 +15,15 @@ export function firstname(gender = '') {
   if (gender === 'f')
     return utils.oneOf(firstnamesFemale)
   return utils.oneOf(firstnamesMale)
-};
+}
 
 export function lastname() {
   return utils.oneOf(lastnames)
-};
+}
 
 export function fullname(gender = '') {
   return `${firstname(gender)} ${lastname()}`
-};
+}
 
 export function email({name = '', suffix = '.fake', domain = ''} = {}) {
   if (!name)

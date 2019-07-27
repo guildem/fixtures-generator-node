@@ -16,7 +16,7 @@ export function after({max = lastMax} = {}) {
 }
 
 export function before({min = lastMin} = {}) {
-  return timestamp({min: lastMin, max: lastTimestamp})
+  return timestamp({min: min, max: lastTimestamp})
 }
 
 export function last() {

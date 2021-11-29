@@ -1,4 +1,3 @@
-import * as numbers from './numbers'
 import * as lorem from './lorem'
 
 export function fakeImageUrl({width = 640, height = 480, bg = '282828', fg = 'EAE0D0', text = 'Fake Image'} = {}) {

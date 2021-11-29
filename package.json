@@ -1,6 +1,6 @@
 {
   "name": "fixtures-generator-node",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Library helping to generate randomized fixtures with almost-real datas.",
   "keywords": [
     "nodejs",

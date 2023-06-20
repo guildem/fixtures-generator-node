@@ -1,7 +1,7 @@
-import resolve from '@rollup/plugin-node-resolve';
-import babel from '@rollup/plugin-babel';
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const { babel } = require('@rollup/plugin-babel');
 
-export default {
+const config = {
   input: 'src/index.js',
   output: {
     file: 'dist/index.js',
@@ -10,10 +10,12 @@ export default {
     sourcemap: false
   },
   plugins: [
-    resolve(),
+    nodeResolve(),
     babel({
       babelHelpers: 'bundled',
       exclude: 'node_modules/**'
     })
   ]
 };
+
+module.exports = config;

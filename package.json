@@ -1,6 +1,6 @@
 {
   "name": "fixtures-generator-node",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Library helping to generate randomized fixtures with almost-real datas.",
   "keywords": [
     "nodejs",
@@ -26,12 +26,12 @@
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
     "@babel/register": "^7.18.9",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^15.1.0",
     "chai": "^4.3.6",
     "eslint": "^8.23.1",
     "mocha": "^10.0.0",
-    "rollup": "^2.79.0",
+    "rollup": "^3.25.1",
     "uglify-js": "^3.17.0"
   }
 }
